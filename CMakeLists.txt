@@ -9,5 +9,9 @@ else()
     cmake_policy(VERSION 3.14)
 endif()
 
-add_executable(SqliteORM src/simple.cpp)
+
+
+include_directories("./include")
+
+add_executable(SqliteORM src/xsqlite3.cpp simple.cpp)
 target_link_libraries(SqliteORM ${sql})
