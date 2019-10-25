@@ -33,7 +33,7 @@ enum sqlite_column_types {
 
 struct data {
   int type;
-  any d;
+  nonstd::any d;
 };
 
 struct column {
@@ -55,6 +55,5 @@ inline sqliteopen operator|(sqliteopen dest, sqliteopen src) {
   return static_cast<sqliteopen>(static_cast<int>(dest) |
                                  static_cast<int>(src));
 }
-
 
 } // namespace xsqlite3

@@ -38,4 +38,8 @@ The things I need to do:
 
 ### What can I do to this? 
 
-Anything, really. LICENSE can be checked. 
+Anything, really. LICENSE can be checked for additional details.
+
+# Things to note:
+
+- Uses [any lite](https://github.com/martinmoene/any-lite) inplace of std::any(C++17) to preserve C++11 compatibility.
