@@ -1,4 +1,5 @@
 #include "xsqlite3.hpp"
+#include "xsqlite3utils.hpp"
 #include <string>
 namespace xsqlite3 {
 
@@ -13,4 +14,41 @@ xsqlite::xsqlite(std::string filename, sqliteopen flags) {
 }
 
 xsqlite::~xsqlite() { sqlite3_close(this->db); }
+
+bool xsqlite::execute(std::string Query) {
+  sqlite3_stmt *ppsmt;
+
+  sqlite3_prepare_v2(this->db, Query.c_str(), static_cast<int>(Query.length()),
+                     &ppsmt, nullptr);
+
+  int step_track = sqlite3_step(ppsmt);
+  while (step_track != SQLITE_DONE) {
+    int cols = sqlite3_column_count(ppsmt);
+    column datas;
+    data d;
+    for (int i = 0; i < cols; i++) {
+      int type = sqlite3_column_type(ppsmt, i);
+      switch (type) {
+      case 1:
+        d = sqlite3_column_int(ppsmt, i);
+        break;
+      case 2:
+        d = sqlite3_column_double(ppsmt, i);
+        break;
+      case 3:
+        d = sqlite3_column_text(ppsmt, i);
+        break;
+      case 4:
+        d = sqlite3_column_text(ppsmt, i);
+        break;
+      default:
+        d = nullptr;
+        break;
+      }
+      datas.element.push_back(d);
+    } // inner for loop ends here.
+    this->result.push_back(datas);
+    step_track = sqlite3_step(ppsmt);
+  } // while ends here.
+}
 } // namespace xsqlite3
