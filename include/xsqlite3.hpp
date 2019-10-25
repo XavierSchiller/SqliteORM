@@ -4,6 +4,8 @@
 #include <sqlite3.h>
 #include <string>
 #include <vector>
+
+#include "any.hpp"
 namespace xsqlite3 {
 
 enum sqliteopen {
@@ -31,49 +33,7 @@ enum sqlite_column_types {
 
 struct data {
   int type;
-  union {
-    const unsigned char *cdata;
-    int idata;
-    long int ldata;
-    float fdata;
-    double ddata;
-  } d;
-  void operator=(int x) {
-    this->d.idata = x;
-    this->type = sqlite_column_types::integer;
-  };
-  void operator=(float x) {
-    this->d.fdata = x;
-    this->type = sqlite_column_types::floating;
-  };
-  void operator=(double x) {
-    this->d.ddata = x;
-    this->type = sqlite_column_types::doublep;
-  };
-  void operator=(const unsigned char *x) {
-    this->d.cdata = x;
-    this->type = sqlite_column_types::text;
-  };
-  void operator=(long int x) {
-    this->d.ldata = x;
-    this->type = sqlite_column_types::longinteger;
-  };
-
-  template<typename T>
-  T operator=(data d){
-    switch (d.type)
-    {
-    case sqlite_column_types::integer : return d.d.idata;
-    
-    case sqlite_column_types::doublep: return d.d.ddata;
-    
-    case sqlite_column_types::floating : return d.d.fdata;
-    
-    case sqlite_column_types::longinteger : return d.d.ldata;
-    
-    case sqlite_column_types::text : return d.d.cdata;
-    }
-  }
+  any d;
 };
 
 struct column {

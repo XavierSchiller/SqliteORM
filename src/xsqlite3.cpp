@@ -30,19 +30,20 @@ bool xsqlite::execute(std::string Query) {
       int type = sqlite3_column_type(ppsmt, i);
       switch (type) {
       case 1:
-        d = sqlite3_column_int(ppsmt, i);
+        d.type = 1;
+        d.d = sqlite3_column_int(ppsmt, i);
         break;
       case 2:
-        d = sqlite3_column_double(ppsmt, i);
+        d.type = 2;
+        d.d = sqlite3_column_double(ppsmt, i);
         break;
       case 3:
-        d = sqlite3_column_text(ppsmt, i);
+        d.type = 3;
+        d.d = sqlite3_column_text(ppsmt, i);
         break;
       case 4:
-        d = sqlite3_column_text(ppsmt, i);
-        break;
-      default:
-        d = nullptr;
+        d.type = 4;
+        d.d = sqlite3_column_text(ppsmt, i);
         break;
       }
       datas.element.push_back(d);
