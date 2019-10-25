@@ -65,11 +65,11 @@ struct column {
 };
 
 class xsqlite {
-public:
+private:
   sqlite3 *db;
   std::vector<column> result;
 
-//public:
+public:
   xsqlite(std::string filename, sqliteopen flags = sqliteopen::rw);
   ~xsqlite();
   bool execute(std::string Query);
