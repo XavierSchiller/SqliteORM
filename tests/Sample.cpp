@@ -1,10 +1,16 @@
 #include "any.hpp"
 #include "xsqlite3.hpp"
 #include <iostream>
+#include<typeinfo>
 int main() {
   xsqlite3::xsqlite cl("Abestos.sqlite3");
 
+  cl.execute("INSERT INTO MATCHES VALUES(100,'200',100.0)");
   cl.execute("SELECT * FROM MATCHES");
 
-	std::cout << nonstd::any_cast<int>(cl.result.at(0).element.at(0));
+  xsqlite3::Query a("$$ $$");
+
+  a.bind(1,"Something",1000.0,"Asdasdasdasd");
+
+  std::cout << a.to_string();
 }
