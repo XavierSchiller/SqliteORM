@@ -1,9 +1,8 @@
-#include<iostream>
-#include"xsqlite3.hpp"
-int main()
-{
-	xsqlite3::xsqlite cl("Abestos.sqlite3");
+#include "any.hpp"
+#include "xsqlite3.hpp"
+#include <iostream>
+int main() {
+  xsqlite3::xsqlite cl("Abestos.sqlite3");
 
-	cl.execute("SELECT * FROM MATCHES");
-
+  cl.execute("SELECT * FROM MATCHES");
 }

@@ -58,6 +58,22 @@ struct data {
     this->d.ldata = x;
     this->type = sqlite_column_types::longinteger;
   };
+
+  template<typename T>
+  T operator=(data d){
+    switch (d.type)
+    {
+    case sqlite_column_types::integer : return d.d.idata;
+    
+    case sqlite_column_types::doublep: return d.d.ddata;
+    
+    case sqlite_column_types::floating : return d.d.fdata;
+    
+    case sqlite_column_types::longinteger : return d.d.ldata;
+    
+    case sqlite_column_types::text : return d.d.cdata;
+    }
+  }
 };
 
 struct column {
@@ -66,10 +82,10 @@ struct column {
 
 class xsqlite {
 private:
+public:
   sqlite3 *db;
   std::vector<column> result;
 
-public:
   xsqlite(std::string filename, sqliteopen flags = sqliteopen::rw);
   ~xsqlite();
   bool execute(std::string Query);
@@ -79,5 +95,6 @@ inline sqliteopen operator|(sqliteopen dest, sqliteopen src) {
   return static_cast<sqliteopen>(static_cast<int>(dest) |
                                  static_cast<int>(src));
 }
+
 
 } // namespace xsqlite3
