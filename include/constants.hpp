@@ -1,7 +1,7 @@
 #pragma once
 #include <sqlite3.h>
 
-namespace xsqlite3{
+namespace xsqlite3 {
 
 enum sqliteopen {
   read = SQLITE_OPEN_READONLY,
@@ -31,4 +31,4 @@ enum sqlite_column_types {
   text
 };
 
-}
+} // namespace xsqlite3

@@ -1,11 +1,13 @@
 #pragma once
+#include <sqlite3.h>
 #include <stdexcept>
 namespace xsqlite3 {
-class openerr : public std::exception {
+class sqlite3_error : public std::exception {
   std::string errmsg;
 
 public:
-  openerr(std::string err) { this->errmsg = err; }
+  sqlite3_error(sqlite3 *db) { this->errmsg = sqlite3_errmsg(db); }
   const char *what() const noexcept override { return errmsg.c_str(); }
 };
+
 } // namespace xsqlite3
