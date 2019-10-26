@@ -4,6 +4,18 @@
 
 Made as an intresting insight into the database engine of sqlite3. As such, this is not supported by anyone, including the developer of this project. You are free to use this in any project. For further information, look up ORM and sqlite3.
 
+### Things Done:
+- Data Retrival based on a table format (row col format);
+  - Need to provide number of rows and cols.
+
+- Query Binding
+  - Very simple Binding, doesn't take care of inserting quotes around anything.
+
+- Basic Querying. 
+  - Simple Oneliner to Querying is done. Taking Care of transactions is next.
+
+
+
 ### To Implement.
 
 The things I need to do:

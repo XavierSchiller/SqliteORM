@@ -8,9 +8,9 @@ int main() {
   cl.execute("INSERT INTO MATCHES VALUES(100,'200',100.0)");
   cl.execute("SELECT * FROM MATCHES");
 
-  xsqlite3::Query a("$$ $$");
+  xsqlite3::Query a("$$$$");
 
-  a.bind(1,"Something",1000.0,"Asdasdasdasd");
+  a.bind(1,"Something");
 
   std::cout << a.to_string();
 }
