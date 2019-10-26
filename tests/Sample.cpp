@@ -1,5 +1,6 @@
 #include "any.hpp"
 #include "xsqlite3.hpp"
+#include "query.hpp"
 #include <iostream>
 #include<typeinfo>
 int main() {

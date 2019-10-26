@@ -52,4 +52,10 @@ bool xsqlite::execute(std::string Query) {
     step_track = sqlite3_step(ppsmt);
   } // while ends here.
 }
+
+xsqlite::xsqlite(xsqlite *x) {
+  this->db = x->db;
+  this->result = x->result;
+  x->~xsqlite();
+}
 } // namespace xsqlite3

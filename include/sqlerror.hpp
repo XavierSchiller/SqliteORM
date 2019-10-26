@@ -1,3 +1,4 @@
+#pragma once
 #include <stdexcept>
 namespace xsqlite3 {
 class openerr : public std::exception {
