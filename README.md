@@ -18,21 +18,15 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
 
 - Error Handling is done through one single exception, sqlite_error, that can be caught and thrown.
 
-
+- Self Contained(Mostly, considering, I still depend on sqlite3 libraries.)
 
 ### To Implement.
 
 The things I need to do:
 
-- Implement Data Retrival. (Partially Done, I need to provide an interface for accessing that)
-
 - Make allowances for special types in sqlite3 like blob, text, etc.
 
-- Make way for multiple Queries to be executed at once.
-
 - Handle Journal mode.
-
-- Handle Transactions. 
 
 - Write quick start methods to jumpstart project.
 
@@ -49,9 +43,6 @@ The things I need to do:
 - Make it fast. (Secondary goal)
 
 - Provide Node and Python Bindings.
-
-- Make it self contained.
-
 ### What can I do to this? 
 
 Anything, really. LICENSE can be checked for additional details.

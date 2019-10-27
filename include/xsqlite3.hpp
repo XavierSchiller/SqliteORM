@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sqlite3.h>
 #include <string>
+#include <tuple>
 #include <vector>
 namespace xsqlite3 {
 
@@ -46,17 +47,19 @@ public:
   bool rollback_transaction();
   bool rollback_transaction_to_savepoint(std::string savepoint);
 
-
   // Convineince functions
   bool delete_table();
   bool delete_row_from_table_where();
+
+  // Stored Procedures.
+  void add_stored_procedure();
+  void execute_procedure();
 
   // Data Functions
   template <typename T> T get_data(int row, int col) {
     return nonstd::any_cast<T>(this->result.at(row).element.at(col).d);
   }
-};
 
-// Class to take care of binding functions.
+};
 
 } // namespace xsqlite3

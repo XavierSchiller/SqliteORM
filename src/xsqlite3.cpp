@@ -1,6 +1,7 @@
 #include "xsqlite3.hpp"
 #include "xsqlite3utils.hpp"
 #include <string>
+
 namespace xsqlite3 {
 
 // Constructor Segment ----------------------------------
@@ -52,11 +53,11 @@ bool xsqlite::execute(std::string Query) {
         break;
       case 3:
         d.type = 3;
-        d.d = sqlite3_column_text(ppsmt, i);
+        d.d = reinterpret_cast<const char *>(sqlite3_column_text(ppsmt, i));
         break;
       case 4:
         d.type = 4;
-        d.d = sqlite3_column_text(ppsmt, i);
+        d.d = reinterpret_cast<const char *>(sqlite3_column_text(ppsmt, i));
         break;
       }
       datas.element.push_back(d);
