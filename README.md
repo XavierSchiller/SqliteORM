@@ -11,8 +11,12 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
 - Query Binding
   - Very simple Binding, doesn't take care of inserting quotes around anything.
 
-- Basic Querying. 
-  - Simple Oneliner to Querying is done. Taking Care of transactions is next.
+- Transactions are done.
+  - Need to improve on this, since the transactional model is reliant on the user calling a function.
+
+- One Query, Multiple Queries Execution is done as well.
+
+- Error Handling is done through one single exception, sqlite_error, that can be caught and thrown.
 
 
 

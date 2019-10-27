@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <stdexcept>
 namespace xsqlite3 {
 class Query {
 private:

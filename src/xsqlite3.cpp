@@ -70,6 +70,12 @@ bool xsqlite::execute(std::string Query) {
   return true;
 }
 
+bool xsqlite::execute(std::initializer_list<std::string> Queries) {
+  for (std::string x : Queries) {
+    this->execute(x);
+  }
+}
+
 // Transaction Segment ------------------------------------
 bool xsqlite::begin_transaction() { this->execute("BEGIN TRANSACTION"); }
 bool xsqlite::begin_deferred_transaction() {

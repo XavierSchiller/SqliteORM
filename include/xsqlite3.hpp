@@ -30,6 +30,10 @@ public:
 
   // General Functions:
   bool execute(std::string Query);
+  bool execute(std::initializer_list<std::string> Queries);
+
+  // Special Functions (Pragma etc)
+  std::vector<std::string> table_info(std::string tablename);
 
   // Transactions Functions.
   bool begin_transaction();
@@ -41,6 +45,11 @@ public:
   bool rollback();
   bool rollback_transaction();
   bool rollback_transaction_to_savepoint(std::string savepoint);
+
+
+  // Convineince functions
+  bool delete_table();
+  bool delete_row_from_table_where();
 
   // Data Functions
   template <typename T> T get_data(int row, int col) {
