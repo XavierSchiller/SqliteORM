@@ -50,9 +50,8 @@ public:
   // Convineince functions
   bool delete_table();
   bool delete_row_from_table_where();
-      // Table Functions
-      bool
-      table_column_names(std::string table_name);
+  // Table Functions
+  bool table_column_names(std::string table_name);
 
   // Stored Procedures.
   void add_stored_procedure();
@@ -60,21 +59,24 @@ public:
 
   // Data Functions
 
-  //Single Cell At a time
+  // Single Cell At a time
   template <typename T> T get_data(int row, int col) {
     return nonstd::any_cast<T>(this->result.at(row).element.at(col).d);
   }
 
-  //Entire Record in one tuple.
+  // Entire Record in one tuple.
   template <class A, class B, class... T>
-  std::tuple <A, B, T...> get_data_record(int row) {
+  std::tuple<A, B, T...> get_data_record(int row) {
     int cols = 0;
-    std::tuple <A, B, T...> X = {
-      get_data<A>(row, cols++),
-      get_data<B>(row, cols++),
-      get_data<T>(row, cols++)...
-    };
-    return X;
+    std::tuple<A, B, T...> record = {get_data<A>(row, cols++),
+                                     get_data<B>(row, cols++),
+                                     get_data<T>(row, cols++)...};
+    return record;
+  }
+
+  template <class A> std::tuple<A> get_data_record(int row) {
+    std::tuple<A> record = {get_data<A>(row, 0)};
+    return record;
   }
 };
 

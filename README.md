@@ -7,6 +7,7 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
 ### Things Done:
 - Data Retrival based on a table format (row col format);
   - Need to provide number of rows and cols.
+  - Fetches an Entire Record (1 to N)
 
 - Query Binding
   - Very simple Binding, doesn't take care of inserting quotes around anything.
@@ -24,25 +25,39 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
 
 The things I need to do:
 
-- Make allowances for special types in sqlite3 like blob, text, etc.
+- Data Retrival:
+  - Process callback per-record for large databases.
 
-- Handle Journal mode.
+- Clean up
+  - Code looks Positively ugly. Fix that.
 
-- Write quick start methods to jumpstart project.
+- Tests
+  - Add Coverage Tests and automate those tests.
 
-- Make it cross platform (Windows in particular, Cmake behaves badly.)
+- Cross Platform
+  - It's automatically Cross platform, But make sure that things compile smoothly.
 
-- Write a better Cmake file to support many tests.
+- Advanced SQLite Features:
+  - Journal Mode
+  - Typing
+  - Extend SQLite with stored Procedures.
 
-- Write unit tests. ~~What are unit tests?~~
+- Things to consider:
+  - Documentation (Yes, yes, there's nothing to describe at all.)
+  - Clear examples. 
 
-- Make multithreading supported. 
+- To Be researched:
+  - MultiThreading
+  - How to pass connections.
 
-- Query Creator? (This one is out of bounds at the moment. Just a thought.)
+- Cannot be evaluated at this time:
+  - Performance as compared to raw sqlite
 
-- Make it fast. (Secondary goal)
+- Things to do in the future once this project is stable:
+  - Node Bindings (JS Bindings Really.)
+  - Python Bindings.
+  - Spin my own version of Any?
 
-- Provide Node and Python Bindings.
 ### What can I do to this? 
 
 Anything, really. LICENSE can be checked for additional details.

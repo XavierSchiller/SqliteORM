@@ -28,7 +28,7 @@ int main() {
   cl.commit_transaction();
   cl.execute("SELECT * FROM MATCHES");
 
-  auto v = cl.get_data_record<int,const char *,double>(0);
+  auto v = cl.get_data_record<int>(0);
 
-  std::cout<< std::get<1>(v);
+  std::cout<< std::get<0>(v);
 }
