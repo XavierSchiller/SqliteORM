@@ -10,7 +10,7 @@ private:
 
 public:
   // Inputting Records
-  template <typename T> void input_data(T* data) {
+  template <typename T> void input_data(T data) {
     this->_record.push_back(data);
   }
 
@@ -32,6 +32,12 @@ public:
     std::tuple<A> record = {get_data<A>(0)};
     return record;
   }
+
+  void clear() {
+    for (auto x : this->_record) {
+      x.dest();
+    }
+  }
 };
 
 class table {
@@ -39,10 +45,14 @@ private:
   std::vector<record *> _table;
 
 public:
-  inline record* get_record_at(int index) { return this->_table.at(index); }
+  inline record *get_record_at(int index) { return this->_table.at(index); }
 
   inline void input_record(record *r) { this->_table.push_back(r); }
 
-  void clear() { this->_table.clear(); }
+  void clear_records() {
+    for (auto x : _table) {
+      x->clear();
+    }
+  }
 };
 } // namespace xsqlite3

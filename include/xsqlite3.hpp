@@ -72,6 +72,7 @@ public:
     std::tuple<A> record = {get_data<A>(row, 0)};
     return record;
   }
+
 };
 
 } // namespace xsqlite3
