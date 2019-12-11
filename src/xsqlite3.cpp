@@ -14,12 +14,6 @@ xsqlite::xsqlite(std::string filename, sqliteopen flags) {
   // File is opened successfully.
 }
 
-xsqlite::xsqlite(xsqlite *x) {
-  this->db = x->db;
-  this->result = x->result;
-  x->~xsqlite();
-}
-
 xsqlite::~xsqlite() { sqlite3_close(this->db); }
 
 // General Segment ----------------------------------------
@@ -39,28 +33,20 @@ bool xsqlite::execute(std::string Query) {
   while (step_track != SQLITE_DONE) {
     int cols = sqlite3_column_count(ppsmt);
     column datas;
-    data d;
     for (int i = 0; i < cols; i++) {
       int type = sqlite3_column_type(ppsmt, i);
       switch (type) {
       case 1:
-        d.type = 1;
-        d.d = sqlite3_column_int(ppsmt, i);
+        datas.element.push_back(sqlite3_column_int(ppsmt, i));
         break;
       case 2:
-        d.type = 2;
-        d.d = sqlite3_column_double(ppsmt, i);
+        datas.element.push_back(sqlite3_column_double(ppsmt, i));
         break;
       case 3:
-        d.type = 3;
-        d.d = reinterpret_cast<const char *>(sqlite3_column_text(ppsmt, i));
-        break;
       case 4:
-        d.type = 4;
-        d.d = reinterpret_cast<const char *>(sqlite3_column_text(ppsmt, i));
+        datas.element.push_back(reinterpret_cast<const char *>(sqlite3_column_text(ppsmt, i)));
         break;
       }
-      datas.element.push_back(d);
     } // inner for loop ends here.
     this->result.push_back(datas);
     step_track = sqlite3_step(ppsmt);

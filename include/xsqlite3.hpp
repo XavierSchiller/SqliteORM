@@ -9,13 +9,8 @@
 #include <vector>
 namespace xsqlite3 {
 
-struct data {
-  int type;
-  nonstd::any d;
-};
-
 struct column {
-  std::vector<data> element;
+  std::vector<nonstd::any> element;
 };
 
 class xsqlite {
@@ -26,7 +21,6 @@ private:
 public:
   // Constructors and Destructors.
   xsqlite(std::string filename, sqliteopen flags = sqliteopen::rw);
-  xsqlite(xsqlite *x);
   ~xsqlite();
 
   // General Functions:
@@ -61,7 +55,7 @@ public:
 
   // Single Cell At a time
   template <typename T> T get_data(int row, int col) {
-    return nonstd::any_cast<T>(this->result.at(row).element.at(col).d);
+    return nonstd::any_cast<T>(this->result.at(row).element.at(col));
   }
 
   // Entire Record in one tuple.
