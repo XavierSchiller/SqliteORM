@@ -37,7 +37,9 @@ public:
     for (auto x : this->_record) {
       x.dest();
     }
+    this->_record.clear();
   }
+  ~record() { this->clear(); }
 };
 
 class table {
@@ -53,6 +55,9 @@ public:
     for (auto x : _table) {
       x->clear();
     }
+    this->_table.clear();
   }
+
+  ~table() { this->clear_records(); }
 };
 } // namespace xsqlite3
