@@ -18,6 +18,7 @@ set(inclDir
 
 set (SOURCE
     src/xsqlite3.cpp
+    src/record.cpp
 )
 
 include_directories("./include")

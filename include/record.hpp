@@ -24,10 +24,7 @@ public:
     //Do Get the value.
   }
 
-  int col_num()
-  {
-    return sqlite3_column_count(this->_ppsmt);
-  }
+  int num_col();
 };
 } // namespace xsqlite3
 

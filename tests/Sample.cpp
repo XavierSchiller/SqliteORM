@@ -9,5 +9,5 @@ int main() {
 
   xsqlite3::Record rs = cl.execute("SELECT * FROM MATCHES;");
 
-  std::cout << rs.col_num();
+  std::cout << rs.num_col();
 }

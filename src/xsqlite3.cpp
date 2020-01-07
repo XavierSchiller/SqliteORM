@@ -27,37 +27,12 @@ Record xsqlite::execute(std::string Query)
       sqlite3_prepare_v2(this->db, Query.c_str(),
                          static_cast<int>(Query.length()), &ppsmt, nullptr);
 
-  // Find the Error if there.
-
   if (prep_track != SQLITE_OK)
     throw sqlite3_error(this->db);
 
   Record r(ppsmt);
 
   return r;
-}
-
-// Transaction Segment ------------------------------------
-bool xsqlite::begin_transaction() { this->execute("BEGIN TRANSACTION"); }
-bool xsqlite::begin_deferred_transaction()
-{
-  this->execute("BEGIN DEFERRED TRANSACTION");
-}
-bool xsqlite::begin_immediate_transaction()
-{
-  this->execute("BEGIN IMMEDIATE TRANSACTION");
-}
-bool xsqlite::begin_exclusive_transaction()
-{
-  this->execute("BEGIN EXCLUSIVE TRANSACTION");
-}
-bool xsqlite::commit_transaction() { this->execute("COMMIT TRANSACTION"); }
-bool xsqlite::end_transaction() { this->execute("END TRANSACTION"); }
-bool xsqlite::rollback() { this->execute("ROLLBACK"); }
-bool xsqlite::rollback_transaction() { this->execute("ROLLBACK TRANSACTION"); }
-bool xsqlite::rollback_transaction_to_savepoint(std::string savepoint)
-{
-  this->execute("ROLLBACK TRANSACTION TO SAVEPOINT" + savepoint);
 }
 
 } // namespace xsqlite3
