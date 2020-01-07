@@ -1,5 +1,4 @@
 #pragma once
-#include "any.hpp"
 #include "constants.hpp"
 #include "sqlerror.hpp"
 #include <iostream>
@@ -7,16 +6,12 @@
 #include <string>
 #include <tuple>
 #include <vector>
+#include <record.hpp>
 namespace xsqlite3 {
-
-struct column {
-  std::vector<nonstd::any> element;
-};
 
 class xsqlite {
 private:
   sqlite3 *db;
-  std::vector<column> result;
 
 public:
   // Constructors and Destructors.
@@ -24,8 +19,7 @@ public:
   ~xsqlite();
 
   // General Functions:
-  bool execute(std::string Query);
-  bool execute(std::initializer_list<std::string> Queries);
+  Record execute(std::string Query);
 
   // Special Functions (Pragma etc)
   std::vector<std::string> table_info(std::string tablename);
@@ -54,24 +48,6 @@ public:
   // Data Functions
 
   // Single Cell At a time
-  template <typename T> T get_data(int row, int col) {
-    return nonstd::any_cast<T>(this->result.at(row).element.at(col));
-  }
-
-  // Entire Record in one tuple.
-  template <class A, class B, class... T>
-  std::tuple<A, B, T...> get_data_record(int row) {
-    int cols = 0;
-    std::tuple<A, B, T...> record = {get_data<A>(row, cols++),
-                                     get_data<B>(row, cols++),
-                                     get_data<T>(row, cols++)...};
-    return record;
-  }
-
-  template <class A> std::tuple<A> get_data_record(int row) {
-    std::tuple<A> record = {get_data<A>(row, 0)};
-    return record;
-  }
 
 };
 
