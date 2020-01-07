@@ -1,8 +1,7 @@
 #pragma once
 
-namespace xsqlite3{
+namespace xsqlite3 {
 
-class Transaction{
-
-};
+class Transaction
+{};
 }

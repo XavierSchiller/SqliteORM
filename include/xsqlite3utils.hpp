@@ -1,6 +1,7 @@
-#include<vector>
-#include<string>
-#include<iterator>
-#include<sstream>
+#include <iterator>
+#include <sstream>
+#include <string>
+#include <vector>
 
-std::vector<std::string> split(const std::string &s, char delim);
+std::vector<std::string>
+split(const std::string& s, char delim);

@@ -30,9 +30,6 @@ public:
   // Table Functions
   bool table_column_names(std::string table_name);
 
-  // Data Functions
-
-  // Single Cell At a time
 };
 
 } // namespace xsqlite3

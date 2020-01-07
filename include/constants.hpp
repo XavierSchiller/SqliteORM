@@ -3,7 +3,8 @@
 
 namespace xsqlite3 {
 
-enum sqliteopen {
+enum sqliteopen
+{
   read = SQLITE_OPEN_READONLY,
   write = SQLITE_OPEN_READWRITE,
   rw = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
@@ -16,12 +17,15 @@ enum sqliteopen {
   pcache = SQLITE_OPEN_PRIVATECACHE
 };
 
-inline sqliteopen operator|(sqliteopen dest, sqliteopen src) {
+inline sqliteopen
+operator|(sqliteopen dest, sqliteopen src)
+{
   return static_cast<sqliteopen>(static_cast<int>(dest) |
                                  static_cast<int>(src));
 }
 
-enum sqlite_column_types {
+enum sqlite_column_types
+{
   integer,
   longinteger,
   floating,
