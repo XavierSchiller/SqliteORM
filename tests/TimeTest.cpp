@@ -35,14 +35,13 @@ main_wrapper_test()
 
   for (int i = 0; i < 1000; i++) {
     cl.execute_update(queries[i]);
-    std::cout << "Executing:" << i << std::endl;
   }
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-  std::cout << "Time difference = ";
+  std::cout << "Wrapper Time Execution = ";
   std::cout
     << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count();
-  std::cout << "[µs]" << std::endl;
+  std::cout << "[ms]" << std::endl;
 }
 
 inline void
@@ -83,18 +82,100 @@ main_non_wrapper_test()
 
   for (int i = 0; i < 1000; i++) {
     sqlite3_exec_b(db, qs[i].c_str(), qs[i].length());
-    std::cout << "Executing:" << i << std::endl;
   }
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-  std::cout << "Time difference = ";
+  std::cout << "Non Wrapper Time Execution = ";
   std::cout
     << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count();
-  std::cout << "[µs]" << std::endl;
+  std::cout << "[ms]" << std::endl;
+}
+
+int
+main_non_wrapper_c_style()
+{
+  const char* is = "create table t1(a INTEGER, b INTEGER, c VARCHAR(100));";
+  int islen = strlen(is);
+  char* qs[1000];
+  int len[1000];
+  for (int i = 0; i < 1000; i++) {
+    qs[i] = (char*)malloc(100);
+    std::string x = "INSERT INTO t1 values(" + std::to_string(i) + "," +
+                    std::to_string(rand()) + +",'" + random_string(30) + "');";
+    strcpy(qs[i], x.c_str());
+    len[i] = strlen(qs[i]);
+  }
+
+  const char* filename = "rbe.db";
+  sqlite3* db;
+  int status = sqlite3_open_v2(filename,
+                               &db,
+                               SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
+                               NULL); // Opening the file.
+
+  std::chrono::steady_clock::time_point begin =
+    std::chrono::steady_clock::now();
+
+  sqlite3_exec_b(db, is, islen);
+
+  for (int i = 0; i < 1000; i++) {
+    sqlite3_exec_b(db, qs[i], len[i]);
+  }
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+  std::cout << "Non Wrapper Time(CStyle) Execution = ";
+  std::cout
+    << std::chrono::duration_cast<std::chrono::seconds>(end - begin).count();
+  std::cout << "[ms]" << std::endl;
+}
+
+int
+main_non_wrapper_c_style_transactions()
+{
+  const char* is = "create table t1(a INTEGER, b INTEGER, c VARCHAR(100));";
+  int islen = strlen(is);
+  char* qs[1000];
+  int len[1000];
+  for (int i = 0; i < 1000; i++) {
+    qs[i] = (char*)malloc(100);
+    std::string x = "INSERT INTO t1 values(" + std::to_string(i) + "," +
+                    std::to_string(rand()) + +",'" + random_string(30) + "');";
+    strcpy(qs[i], x.c_str());
+    len[i] = strlen(qs[i]);
+  }
+
+  const char* filename = "rbe.db";
+  sqlite3* db;
+  int status = sqlite3_open_v2(filename,
+                               &db,
+                               SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
+                               NULL); // Opening the file.
+
+
+  std::chrono::steady_clock::time_point begin =
+    std::chrono::steady_clock::now();
+
+  sqlite3_exec(db, "BEGIN TRANSACTION", nullptr, nullptr, nullptr);
+  sqlite3_exec_b(db, is, islen);
+
+  for (int i = 0; i < 1000; i++) {
+    sqlite3_exec_b(db, qs[i], len[i]);
+  }
+
+  sqlite3_exec(db, "END TRANSACTION", nullptr, nullptr, nullptr);
+  std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+  std::cout << "Non Wrapper Time(CStyle) Execution with transactions = ";
+  std::cout
+    << std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count();
+  std::cout << "[ms]" << std::endl;
 }
 
 int
 main()
 {
-  main_non_wrapper_test();
+  main_non_wrapper_c_style_transactions();
+  // main_non_wrapper_c_style();
+  // main_wrapper_test();
+  // main_non_wrapper_test();
 }
