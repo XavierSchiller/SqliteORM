@@ -11,7 +11,15 @@ class Record
 private:
   sqlite3_stmt* _ppsmt;
   int step_track;
-  // xyz
+
+  // get_X functions
+  int get_int(int index);
+  int64_t get_int64(int index);
+  double get_double(int index);
+  void* get_blob(int index);
+  std::string get_text(int index);
+  std::u16string get_text16(int index);
+
 public:
   // Constructors
   Record(sqlite3_stmt* ppsmt)
@@ -25,14 +33,6 @@ public:
   bool has_next();
   bool next();
 
-  // get_X functions
-  int get_int(int index);
-  int64_t get_int64(int index);
-  double get_double(int index);
-  void* get_blob(int index);
-  std::string get_text(int index);
-  std::u16string get_text16(int index);
-
   // utility functions.
   int num_col();
   int col_length(int index);
@@ -42,9 +42,7 @@ public:
   T get(int index){};
 };
 
-
 //-------------------Template Specializations
-
 
 template<>
 inline int // inline is necessary for the function to work.
@@ -87,7 +85,6 @@ Record::get<void*>(int index)
 {
   return this->get_blob(index);
 }
-
 
 //--------------------Other Functions
 std::string

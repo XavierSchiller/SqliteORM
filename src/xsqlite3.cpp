@@ -34,4 +34,21 @@ xsqlite::execute(std::string Query)
   return r;
 }
 
+int
+xsqlite::execute_update(std::string Query)
+{
+  sqlite3_stmt* ppsmt;
+
+  int prep_track = sqlite3_prepare_v2(
+    this->db, Query.c_str(), static_cast<int>(Query.length()), &ppsmt, nullptr);
+
+  if (prep_track != SQLITE_OK)
+    throw sqlite3_error(this->db);
+
+  while (sqlite3_step(ppsmt) != SQLITE_DONE)
+    ;
+
+  return sqlite3_changes(this->db);
+}
+
 } // namespace xsqlite3

@@ -5,9 +5,9 @@
 int
 main()
 {
-  xsqlite3::xsqlite cl("chinook.db");
+  xsqlite3::xsqlite cl("Abestos.sqlite3");
 
-  xsqlite3::Record rs = cl.execute("SELECT * FROM albums;");
-  rs.next();
-  std::cout << rs.get<int>(0);
+  std::string que = "Insert into tester values(100,'asdasdasd',0123123.2322);";
+
+  std::cout << cl.execute_update(que);
 }

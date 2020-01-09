@@ -4,6 +4,8 @@ project(SqliteORM VERSION 0.1.0)
 add_subdirectory(tests)
 
 set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O6 -DNDEBUG=1")
+
 
 find_library(sql NAMES sqlite3)
 if(${CMAKE_VERSION} VERSION_LESS 3.14)
