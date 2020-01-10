@@ -1,31 +1,48 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(SqliteORM VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.1...3.15) #Minimum version for Ubuntu 18.04
 
-add_subdirectory(tests)
+#Cmake Policy -- https://cliutils.gitlab.io/modern-cmake/chapters/basics.html
 
+
+if(${CMAKE_VERSION} VERSION_LESS 3.12)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+    cmake_policy(VERSION 3.12)
+    endif()
+    
+#Project Details:
+
+project(SqliteORM 
+VERSION 1.0.0
+DESCRIPTION "A small Wrapper for Sqlite"
+LANGUAGES CXX
+)
+
+
+#Set CXX Flags:
 set (CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O6 -DNDEBUG=1")
 
 
 find_library(sql NAMES sqlite3)
-if(${CMAKE_VERSION} VERSION_LESS 3.14)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
-    cmake_policy(VERSION 3.14)
-endif()
 
-set(inclDir
-    ./include/
-)
-
+#Set Library Files:
 set (SOURCE
-    src/xsqlite3.cpp
-    src/record.cpp
+src/xsqlite3.cpp
+src/record.cpp
 )
 
-include_directories("./include")
-
-add_library(SqliteORM ${SOURCE})
+add_library(SqliteORM STATIC ${SOURCE})
 target_link_libraries(SqliteORM ${sql})
-enable_testing()
-add_test(NAME SampleTest COMMAND Test)
+target_include_directories(SqliteORM
+    PUBLIC 
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+)
+
+#Testing: -- Uses GoogleTest
+
+option(PACKAGE_TESTS "Build the tests" ON)
+if(PACKAGE_TESTS)
+    enable_testing()
+    include(GoogleTest)
+    add_subdirectory(tests)
+endif()

@@ -25,9 +25,6 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
 
 The things I need to do:
 
-- Data Retrival:
-  - Process callback per-record for large databases.
-
 - Clean up
   - Code looks Positively ugly. Fix that.
 
@@ -42,21 +39,23 @@ The things I need to do:
   - Typing
   - Extend SQLite with stored Procedures.
 
+- Transactional Model
+
 - Things to consider:
-  - Documentation (Yes, yes, there's nothing to describe at all.)
+  - Documentation (Not a word.)
   - Clear examples. 
 
 - To Be researched:
   - MultiThreading
-  - How to pass connections.
-
-- Cannot be evaluated at this time:
-  - Performance as compared to raw sqlite
 
 - Things to do in the future once this project is stable:
   - Node Bindings (JS Bindings Really.)
   - Python Bindings.
   - Spin my own version of Any?
+
+### Performance
+
+It is about the same as the raw sqlite3 performanace. Only a few ms on top of it per 1000 transactions due to function calls. 
 
 ### What can I do to this? 
 
@@ -64,4 +63,3 @@ Anything, really. LICENSE can be checked for additional details.
 
 # Things to note:
 
-- Uses [any lite](https://github.com/martinmoene/any-lite) inplace of std::any(C++17) to preserve C++11 compatibility.
