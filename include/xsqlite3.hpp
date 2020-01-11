@@ -2,7 +2,7 @@
 #include "constants.hpp"
 #include "record.hpp"
 #include "sqlerror.hpp"
-#include "sqlite3/sqlite3.h"
+#include "sqlite3.h"
 #include <string>
 namespace xsqlite3 {
 
