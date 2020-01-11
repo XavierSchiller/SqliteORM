@@ -7,7 +7,7 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 else()
     cmake_policy(VERSION 3.12)
-    endif()
+endif()
     
 #Project Details:
 
@@ -20,10 +20,7 @@ LANGUAGES CXX
 
 #Set CXX Flags:
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O6 -DNDEBUG=1")
-find_package(Sqlite3 REQUIRED)
-if(UNIX)
-    find_package(Threads)
-endif()
+add_subdirectory("${PROJECT_SOURCE_DIR}/extern/sqlite")
 #Set Library Files:
 set (SOURCE
 src/xsqlite3.cpp
