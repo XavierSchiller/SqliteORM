@@ -1,34 +1,26 @@
 #pragma once
 #include "constants.hpp"
-#include "sqlerror.hpp"
 #include "record.hpp"
-#include <iostream>
+#include "sqlerror.hpp"
+#include "sqlite3/sqlite3.h"
 #include <string>
-#include <tuple>
-#include <vector>
-#include <sqlite3.h>
-namespace xsqlite3
-{
+namespace xsqlite3 {
 
 class xsqlite
 {
 private:
-  sqlite3 *db;
-
+  sqlite3* db;
+  void open(std::string filename, sqliteopen flags);
+  sqlite3_stmt* prepare(std::string Query);
 public:
   // Constructors and Destructors.
-  xsqlite(std::string filename, sqliteopen flags = sqliteopen::rw);
+  xsqlite(std::string filename, sqliteopen flags);
+  xsqlite(std::string filename);
   ~xsqlite();
 
   // General Functions:
   Record execute(std::string Query);
   int execute_update(std::string Query);
-
-  // Special Functions (Pragma etc)
-  std::vector<std::string> table_info(std::string tablename);
-
-  // Table Functions
-  bool table_column_names(std::string table_name);
 
 };
 

@@ -19,20 +19,20 @@ LANGUAGES CXX
 
 
 #Set CXX Flags:
-set (CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O6 -DNDEBUG=1")
-
-
-find_library(sql NAMES sqlite3)
-
+find_package(Sqlite3 REQUIRED)
+if(UNIX)
+    find_package(Threads)
+endif()
 #Set Library Files:
 set (SOURCE
 src/xsqlite3.cpp
 src/record.cpp
+src/transaction.cpp
 )
 
 add_library(SqliteORM STATIC ${SOURCE})
-target_link_libraries(SqliteORM ${sql})
+target_link_libraries(SqliteORM sqlite3::sqlite3)
 target_include_directories(SqliteORM
     PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

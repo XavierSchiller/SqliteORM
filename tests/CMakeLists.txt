@@ -13,7 +13,7 @@ set_target_properties(gtest PROPERTIES FOLDER extern)
 set_target_properties(gtest_main PROPERTIES FOLDER extern)
 set_target_properties(gmock PROPERTIES FOLDER extern)
 set_target_properties(gmock_main PROPERTIES FOLDER extern)
-
+find_package(Threads)
 #Macro for autoTest additions.
 macro(package_add_test TESTNAME)
     # create an exectuable in which the tests will be stored

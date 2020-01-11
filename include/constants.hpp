@@ -1,5 +1,5 @@
 #pragma once
-#include <sqlite3.h>
+#include "sqlite3/sqlite3.h"
 
 namespace xsqlite3 {
 
@@ -12,7 +12,6 @@ enum sqliteopen
   nom = SQLITE_OPEN_NOMUTEX,
   fullm = SQLITE_OPEN_FULLMUTEX,
   ouri = SQLITE_OPEN_URI,
-  mem = SQLITE_OPEN_MEMORY,
   scache = SQLITE_OPEN_SHAREDCACHE,
   pcache = SQLITE_OPEN_PRIVATECACHE
 };
