@@ -20,7 +20,7 @@ LANGUAGES CXX
 
 #Set CXX Flags:
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O6 -DNDEBUG=1")
-add_subdirectory("${PROJECT_SOURCE_DIR}/extern/sqlite")
+add_subdirectory("${PROJECT_SOURCE_DIR}/extern/sqlite" "extern/sqlite")
 #Set Library Files:
 set (SOURCE
 src/xsqlite3.cpp
