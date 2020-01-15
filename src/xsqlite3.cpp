@@ -9,7 +9,7 @@ xsqlite::open(std::string filename, SqliteOpen flags)
   int status =
     sqlite3_open_v2(filename.c_str(), &db, flags, NULL); // Opening the file.
   if (status != SQLITE_OK) {
-    throw sqlite3_error(this->db);
+    throw SqliteError(this->db);
   }
 }
 
@@ -41,7 +41,7 @@ xsqlite::prepare(std::string Query)
     this->db, Query.c_str(), static_cast<int>(Query.length()), &ppsmt, nullptr);
 
   if (prep_track != SQLITE_OK)
-    throw sqlite3_error(this->db);
+    throw SqliteError(this->db);
 
   return ppsmt;
 }
@@ -64,7 +64,7 @@ xsqlite::execute_update(std::string Query)
     this->db, Query.c_str(), static_cast<int>(Query.length()), &ppsmt, nullptr);
 
   if (prep_track != SQLITE_OK)
-    throw sqlite3_error(this->db);
+    throw SqliteError(this->db);
 
   while (sqlite3_step(ppsmt) != SQLITE_DONE)
     ;
