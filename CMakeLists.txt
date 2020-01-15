@@ -46,7 +46,6 @@ set (SOURCE
     ${PROJECT_SOURCE_DIR}/src/xsqlite3.cpp
     ${PROJECT_SOURCE_DIR}/src/record.cpp
     ${PROJECT_SOURCE_DIR}/src/transaction.cpp
-    ${PROJECT_SOURCE_DIR}/src/query.cpp
 )
 
 
