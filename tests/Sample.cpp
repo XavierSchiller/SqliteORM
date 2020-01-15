@@ -1,4 +1,5 @@
 #include "xsqlite3.hpp"
+#include "transaction.hpp"
 #include "gtest/gtest.h"
 
 class RecordTest : public ::testing::Test
@@ -33,6 +34,19 @@ TEST_F(RecordTest, RecordTest_ObtainsString_Test)
 {
   auto rs = cl.execute("select * from tester");
   EXPECT_STRCASEEQ("asdasdasd", rs.get<std::string>(1).c_str());
+}
+
+TEST_F(RecordTest, RecordTest_Transaction_Basic)
+{
+  EXPECT_NO_THROW({
+    xsqlite3::Transaction tx(cl);
+    auto rs = tx.execute("Select * from tester;");
+    if(rs.get<int>(0) != 100)
+      throw "AAA";
+    int a = tx.execute_update("Insert into tester values(100,'asdasdasd',123123.2322);");
+    if(a != 1)
+      throw "AAA";
+  });
 }
 
 int

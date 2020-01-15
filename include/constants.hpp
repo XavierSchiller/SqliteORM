@@ -3,7 +3,11 @@
 
 namespace xsqlite3 {
 
-enum sqliteopen
+/**
+ * @brief Flag Enumerations for File open and closing.
+ * 
+ */
+enum SqliteOpen
 {
   read = SQLITE_OPEN_READONLY,
   write = SQLITE_OPEN_READWRITE,
@@ -16,10 +20,10 @@ enum sqliteopen
   pcache = SQLITE_OPEN_PRIVATECACHE
 };
 
-inline sqliteopen
-operator|(sqliteopen dest, sqliteopen src)
+inline SqliteOpen
+operator|(SqliteOpen dest, SqliteOpen src)
 {
-  return static_cast<sqliteopen>(static_cast<int>(dest) |
+  return static_cast<SqliteOpen>(static_cast<int>(dest) |
                                  static_cast<int>(src));
 }
 

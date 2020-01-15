@@ -7,11 +7,8 @@ namespace xsqlite3 {
 
 class Transaction : public xsqlite
 {
-private:
-  sqlite3* db;
-
 public:
-  Transaction(sqlite3* db);
+  Transaction(xsqlite obj);
   int commit(); // Needs to return status codes.
 };
 }

@@ -4,7 +4,7 @@
 namespace xsqlite3 {
 
 void
-xsqlite::open(std::string filename, sqliteopen flags)
+xsqlite::open(std::string filename, SqliteOpen flags)
 {
   int status =
     sqlite3_open_v2(filename.c_str(), &db, flags, NULL); // Opening the file.
@@ -12,14 +12,20 @@ xsqlite::open(std::string filename, sqliteopen flags)
     throw sqlite3_error(this->db);
   }
 }
-xsqlite::xsqlite(std::string filename, sqliteopen flags)
+
+xsqlite::xsqlite(std::string filename, SqliteOpen flags)
 {
   open(filename, flags);
 }
 
 xsqlite::xsqlite(std::string filename)
 {
-  open(filename, sqliteopen::rw);
+  open(filename, SqliteOpen::rw);
+}
+
+xsqlite::xsqlite(xsqlite& obj)
+{
+  this->db = obj.db;
 }
 
 xsqlite::~xsqlite()

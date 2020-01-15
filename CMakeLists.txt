@@ -43,9 +43,10 @@ find_package(SQLite3 REQUIRED)
 
 #Set the source files that the library will be built on
 set (SOURCE
-    src/xsqlite3.cpp
-    src/record.cpp
-    src/transaction.cpp
+    ${PROJECT_SOURCE_DIR}/src/xsqlite3.cpp
+    ${PROJECT_SOURCE_DIR}/src/record.cpp
+    ${PROJECT_SOURCE_DIR}/src/transaction.cpp
+    ${PROJECT_SOURCE_DIR}/src/query.cpp
 )
 
 
