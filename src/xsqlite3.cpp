@@ -1,5 +1,4 @@
 #include "xsqlite3.hpp"
-#include "xsqlite3utils.hpp"
 #include <string>
 namespace xsqlite3 {
 
