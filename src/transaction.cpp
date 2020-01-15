@@ -1,4 +1,5 @@
 #include "transaction.hpp"
+#include "record.hpp"
 #include "sqlerror.hpp"
 namespace xsqlite3 {
 
@@ -11,14 +12,10 @@ Transaction::Transaction(sqlite3* db)
     throw sqlite3_error(db);
 }
 
-
 void
 Transaction::commit()
 {
   int val =
     sqlite3_exec(this->db, "END TRANSACTION", nullptr, nullptr, nullptr);
 }
-
-int Transaction::executeUpdate(std::string query){}
-Record Transaction::executeSelect(std::string query){}
 }

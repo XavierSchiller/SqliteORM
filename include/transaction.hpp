@@ -1,17 +1,17 @@
 #pragma once
-#include "sqlite3.h"
-#include <string>
 #include "record.hpp"
+#include "sqlite3.h"
+#include "xsqlite3.hpp"
+#include <string>
 namespace xsqlite3 {
 
-class Transaction
+class Transaction : public xsqlite
 {
 private:
   sqlite3* db;
+
 public:
   Transaction(sqlite3* db);
-  int executeUpdate(std::string query);
-  Record executeSelect(std::string query); // Becasuse of Select
   void commit();
 };
 }
