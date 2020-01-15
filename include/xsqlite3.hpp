@@ -6,7 +6,7 @@
 #include <string>
 namespace xsqlite3 {
 
-class xsqlite
+class Sqlite
 {
 protected:
   sqlite3* db;
@@ -15,10 +15,10 @@ protected:
 
 public:
   // Constructors and Destructors.
-  xsqlite(std::string filename, SqliteOpen flags);
-  xsqlite(std::string filename);
-  xsqlite(xsqlite &obj);
-  ~xsqlite();
+  Sqlite(std::string filename, SqliteOpen flags);
+  Sqlite(std::string filename);
+  Sqlite(Sqlite &obj);
+  ~Sqlite();
 
   // General Functions:
   Record execute(std::string Query);

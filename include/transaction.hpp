@@ -5,10 +5,10 @@
 #include <string>
 namespace xsqlite3 {
 
-class Transaction : public xsqlite
+class Transaction : public Sqlite
 {
 public:
-  Transaction(xsqlite obj);
+  Transaction(Sqlite obj);
   int commit(); // Needs to return status codes.
 };
 }

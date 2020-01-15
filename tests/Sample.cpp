@@ -5,7 +5,7 @@
 class RecordTest : public ::testing::Test
 {
 protected:
-  xsqlite3::xsqlite cl;
+  xsqlite3::Sqlite cl;
   RecordTest()
     : cl(":memory:")
   {}

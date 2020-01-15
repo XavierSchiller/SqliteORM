@@ -3,8 +3,8 @@
 #include "sqlerror.hpp"
 namespace xsqlite3 {
 
-Transaction::Transaction(xsqlite obj)
-  : xsqlite(obj)
+Transaction::Transaction(Sqlite obj)
+  : Sqlite(obj)
 {}
 
 int

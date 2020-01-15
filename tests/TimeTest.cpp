@@ -26,7 +26,7 @@ main_wrapper_test()
                  std::to_string(rand()) + +",'" + random_string(30) + "');";
   }
 
-  xsqlite3::xsqlite cl("rbs.db");
+  xsqlite3::Sqlite cl("rbs.db");
 
   std::chrono::steady_clock::time_point begin =
     std::chrono::steady_clock::now();

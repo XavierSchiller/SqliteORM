@@ -4,7 +4,7 @@
 namespace xsqlite3 {
 
 void
-xsqlite::open(std::string filename, SqliteOpen flags)
+Sqlite::open(std::string filename, SqliteOpen flags)
 {
   int status =
     sqlite3_open_v2(filename.c_str(), &db, flags, NULL); // Opening the file.
@@ -13,28 +13,28 @@ xsqlite::open(std::string filename, SqliteOpen flags)
   }
 }
 
-xsqlite::xsqlite(std::string filename, SqliteOpen flags)
+Sqlite::Sqlite(std::string filename, SqliteOpen flags)
 {
   open(filename, flags);
 }
 
-xsqlite::xsqlite(std::string filename)
+Sqlite::Sqlite(std::string filename)
 {
   open(filename, SqliteOpen::eReadWrite);
 }
 
-xsqlite::xsqlite(xsqlite& obj)
+Sqlite::Sqlite(Sqlite& obj)
 {
   this->db = obj.db;
 }
 
-xsqlite::~xsqlite()
+Sqlite::~Sqlite()
 {
   sqlite3_close(this->db);
 }
 
 sqlite3_stmt*
-xsqlite::prepare(std::string Query)
+Sqlite::prepare(std::string Query)
 {
   sqlite3_stmt* ppsmt;
   int prep_track = sqlite3_prepare_v2(
@@ -47,7 +47,7 @@ xsqlite::prepare(std::string Query)
 }
 
 Record
-xsqlite::execute(std::string Query)
+Sqlite::execute(std::string Query)
 {
   sqlite3_stmt* ppsmt = this->prepare(Query);
   Record r(ppsmt);
@@ -56,7 +56,7 @@ xsqlite::execute(std::string Query)
 }
 
 int
-xsqlite::execute_update(std::string Query)
+Sqlite::execute_update(std::string Query)
 {
   sqlite3_stmt* ppsmt;
 
