@@ -20,7 +20,7 @@ xsqlite::xsqlite(std::string filename, SqliteOpen flags)
 
 xsqlite::xsqlite(std::string filename)
 {
-  open(filename, SqliteOpen::rw);
+  open(filename, SqliteOpen::eReadWrite);
 }
 
 xsqlite::xsqlite(xsqlite& obj)

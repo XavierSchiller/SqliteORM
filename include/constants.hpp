@@ -9,15 +9,15 @@ namespace xsqlite3 {
  */
 enum SqliteOpen
 {
-  read = SQLITE_OPEN_READONLY,
-  write = SQLITE_OPEN_READWRITE,
-  rw = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
-  create = SQLITE_OPEN_CREATE,
-  nom = SQLITE_OPEN_NOMUTEX,
-  fullm = SQLITE_OPEN_FULLMUTEX,
-  ouri = SQLITE_OPEN_URI,
-  scache = SQLITE_OPEN_SHAREDCACHE,
-  pcache = SQLITE_OPEN_PRIVATECACHE
+  eRead = SQLITE_OPEN_READONLY,
+  eWrite = SQLITE_OPEN_READWRITE,
+  eReadWrite = SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE,
+  eCreate = SQLITE_OPEN_CREATE,
+  eNoMutex = SQLITE_OPEN_NOMUTEX,
+  eFullMutex = SQLITE_OPEN_FULLMUTEX,
+  eURI = SQLITE_OPEN_URI,
+  eSharedCache = SQLITE_OPEN_SHAREDCACHE,
+  ePrivateCache = SQLITE_OPEN_PRIVATECACHE
 };
 
 inline SqliteOpen
@@ -27,7 +27,7 @@ operator|(SqliteOpen dest, SqliteOpen src)
                                  static_cast<int>(src));
 }
 
-enum sqlite_column_types
+enum SqliteColumnTypes
 {
   integer,
   longinteger,
