@@ -10,8 +10,8 @@ class Sqlite
 {
 protected:
   sqlite3* db;
-  void open(std::string filename, SqliteOpen flags);
-  sqlite3_stmt* prepare(std::string Query);
+  void Open(std::string filename, SqliteOpen flags);
+  sqlite3_stmt* Prepare(std::string Query);
 
 public:
   // Constructors and Destructors.
@@ -21,8 +21,8 @@ public:
   ~Sqlite();
 
   // General Functions:
-  Record execute(std::string Query);
-  int execute_update(std::string Query);
+  Record Execute(std::string Query);
+  int ExecuteUpdate(std::string Query);
 };
 
 } // namespace xsqlite3

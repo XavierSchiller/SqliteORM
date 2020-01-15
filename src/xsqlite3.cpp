@@ -4,7 +4,7 @@
 namespace xsqlite3 {
 
 void
-Sqlite::open(std::string filename, SqliteOpen flags)
+Sqlite::Open(std::string filename, SqliteOpen flags)
 {
   int status =
     sqlite3_open_v2(filename.c_str(), &db, flags, NULL); // Opening the file.
@@ -15,12 +15,12 @@ Sqlite::open(std::string filename, SqliteOpen flags)
 
 Sqlite::Sqlite(std::string filename, SqliteOpen flags)
 {
-  open(filename, flags);
+  Open(filename, flags);
 }
 
 Sqlite::Sqlite(std::string filename)
 {
-  open(filename, SqliteOpen::eReadWrite);
+  Open(filename, SqliteOpen::eReadWrite);
 }
 
 Sqlite::Sqlite(Sqlite& obj)
@@ -34,7 +34,7 @@ Sqlite::~Sqlite()
 }
 
 sqlite3_stmt*
-Sqlite::prepare(std::string Query)
+Sqlite::Prepare(std::string Query)
 {
   sqlite3_stmt* ppsmt;
   int prep_track = sqlite3_prepare_v2(
@@ -47,16 +47,16 @@ Sqlite::prepare(std::string Query)
 }
 
 Record
-Sqlite::execute(std::string Query)
+Sqlite::Execute(std::string Query)
 {
-  sqlite3_stmt* ppsmt = this->prepare(Query);
+  sqlite3_stmt* ppsmt = this->Prepare(Query);
   Record r(ppsmt);
 
   return r;
 }
 
 int
-Sqlite::execute_update(std::string Query)
+Sqlite::ExecuteUpdate(std::string Query)
 {
   sqlite3_stmt* ppsmt;
 

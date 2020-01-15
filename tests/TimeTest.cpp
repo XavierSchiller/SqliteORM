@@ -31,10 +31,10 @@ main_wrapper_test()
   std::chrono::steady_clock::time_point begin =
     std::chrono::steady_clock::now();
 
-  cl.execute_update("create table t1(a INTEGER, b INTEGER, c VARCHAR(100));");
+  cl.ExecuteUpdate("create table t1(a INTEGER, b INTEGER, c VARCHAR(100));");
 
   for (int i = 0; i < 1000; i++) {
-    cl.execute_update(queries[i]);
+    cl.ExecuteUpdate(queries[i]);
   }
   std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
