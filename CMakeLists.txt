@@ -1,36 +1,68 @@
-cmake_minimum_required(VERSION 3.1...3.15) #Minimum version for Ubuntu 18.04
-
 #Cmake Policy -- https://cliutils.gitlab.io/modern-cmake/chapters/basics.html
+#Refer to: https://cmake.org/cmake/help/v3.10/manual/cmake-buildsystem.7.html
 
 
-if(${CMAKE_VERSION} VERSION_LESS 3.12)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
-    cmake_policy(VERSION 3.12)
-endif()
+# Set the Minimum version of CMake: https://cmake.org/cmake/help/v3.10/command/cmake_minimum_required.html
+# Setting FATAL_ERROR: Not wanting to deal with version 3.10.2 or lower
+# 3.10.2 was released on October 12 2017.
+cmake_minimum_required(VERSION 3.10.2 FATAL_ERROR)
 
-list(INSERT CMAKE_MODULE_PATH 0 ${CMAKE_SOURCE_DIR}/cmake)
+# Currently Leaving out policy because of backwards compatibility of CMake.
+# See: https://cmake.org/cmake/help/v3.10/command/cmake_policy.html
 
-#Project Details:
 
+option(PACKAGE_TESTS "Build the tests" ON)
+
+# -------------------------------------------------------------------------------
+# Project Details:
 project(SqliteORM 
-VERSION 1.0.0
-DESCRIPTION "A small Wrapper for Sqlite"
-LANGUAGES CXX
+    VERSION 1.0.0
+    DESCRIPTION "A small Wrapper for Sqlite"
+    LANGUAGES CXX
 )
 
 
-#Set CXX Flags:
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wall -O6 -DNDEBUG=1")
-#Set Library Files:
+# ----------------------------------------------------------------------------------
+
+# Ensuring that SQLite3 Packages are found via FindSQLite3.cmake
+
+# Appends the Path of FindSQLite3.cmake into the search path of CMAKE_MODULES.
+# Always use PROJECT_SOURCE_DIR to refer to the directory of the most recent project() call.
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
+
+
+# Finds SQLite3 and imports it via Module Mode.
+# See: https://cmake.org/cmake/help/v3.10/command/find_package.html
+# SQLite3 is absolutely Required, hence the required.
+find_package(SQLite3 REQUIRED)
+
+
+# ----------------------------------------------------------------------------------
+
+
+
+#Set the source files that the library will be built on
 set (SOURCE
     src/xsqlite3.cpp
     src/record.cpp
     src/transaction.cpp
 )
-find_package(SQLite3)
 
+
+#Define a target SqliteORM that is the target with all our files. 
 add_library(SqliteORM STATIC ${SOURCE})
+
+# Set the target properties.
+# See: https://cmake.org/cmake/help/v3.10/manual/cmake-properties.7.html#target-properties
+# See: https://cmake.org/cmake/help/v3.10/command/set_target_properties.html
+set_target_properties(SqliteORM
+    PROPERTIES 
+        CXX_STANDARD 11
+        CXX_STANDARD_REQUIRED ON
+)
+
+
+
 target_include_directories(SqliteORM
     PUBLIC 
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -41,7 +73,6 @@ target_link_libraries(SqliteORM SQLite3::SQLite3)
 
 #Testing: -- Uses GoogleTest
 
-option(PACKAGE_TESTS "Build the tests" ON)
 if(PACKAGE_TESTS)
     enable_testing()
     include(GoogleTest)
