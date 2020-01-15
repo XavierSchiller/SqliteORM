@@ -12,7 +12,7 @@ Transaction::Transaction(sqlite3* db)
     throw sqlite3_error(db);
 }
 
-void
+int
 Transaction::commit()
 {
   int val =

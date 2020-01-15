@@ -12,6 +12,6 @@ private:
 
 public:
   Transaction(sqlite3* db);
-  void commit();
+  int commit(); // Needs to return status codes.
 };
 }
