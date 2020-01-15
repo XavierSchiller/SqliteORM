@@ -9,6 +9,6 @@ class Transaction : public Sqlite
 {
 public:
   Transaction(Sqlite obj);
-  int commit(); // Needs to return status codes.
+  int Commit(); // Needs to return status codes.
 };
 }

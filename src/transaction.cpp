@@ -8,7 +8,7 @@ Transaction::Transaction(Sqlite obj)
 {}
 
 int
-Transaction::commit()
+Transaction::Commit()
 {
   int val =
     sqlite3_exec(this->db, "END TRANSACTION", nullptr, nullptr, nullptr);
