@@ -9,13 +9,8 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
   - Need to provide number of rows and cols.
   - Fetches an Entire Record (1 to N)
 
-- Query Binding
-  - Very simple Binding, doesn't take care of inserting quotes around anything.
-
 - Transactions are done.
   - Need to improve on this, since the transactional model is reliant on the user calling a function.
-
-- One Query, Multiple Queries Execution is done as well.
 
 - Error Handling is done through one single exception, sqlite_error, that can be caught and thrown.
 
@@ -25,21 +20,16 @@ Made as an intresting insight into the database engine of sqlite3. As such, this
 
 The things I need to do:
 
-- Clean up
-  - Code looks Positively ugly. Fix that.
-
-- Tests
-  - Add Coverage Tests and automate those tests.
-
 - Cross Platform
-  - It's automatically Cross platform, But make sure that things compile smoothly.
+  - It's automatically Cross platform, But make sure that things compile smoothly. (Has an error when compiling with googletest for some reason, no clue why.)
 
 - Advanced SQLite Features:
   - Journal Mode
   - Typing
   - Extend SQLite with stored Procedures.
 
-- Transactional Model
+- Transactions:
+  - Notificational [Callbacks](https://www.sqlite.org/c3ref/commit_hook.html)
 
 - Things to consider:
   - Documentation (Not a word.)
@@ -53,6 +43,17 @@ The things I need to do:
   - Python Bindings.
   - Spin my own version of Any?
 
+- [Database Backup Functions](https://www.sqlite.org/c3ref/backup_finish.html#sqlite3backupfinish)
+
+- Query: 
+  - Binding at runtime.
+  - Query Validation.
+
+- Snapshots
+
+- Multithreading
+
+- Save Points during transactions.
 ### Performance
 
 It is about the same as the raw sqlite3 performanace. Only a few ms on top of it per 1000 transactions due to function calls. 

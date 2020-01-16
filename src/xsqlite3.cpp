@@ -27,6 +27,11 @@ Sqlite::Sqlite(Sqlite& obj)
   this->db = obj.db;
 }
 
+Sqlite::Sqlite()
+{
+  Open(":memory:", SqliteOpen::eReadWrite);
+}
+
 Sqlite::~Sqlite()
 {
   sqlite3_close(this->db);

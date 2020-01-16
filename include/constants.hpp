@@ -27,15 +27,4 @@ operator|(SqliteOpen dest, SqliteOpen src)
                                  static_cast<int>(src));
 }
 
-enum SqliteColumnTypes
-{
-  integer,
-  longinteger,
-  floating,
-  doublep,
-  blob,
-  null,
-  text
-};
-
 } // namespace xsqlite3

@@ -18,6 +18,7 @@ public:
   Sqlite(std::string filename, SqliteOpen flags);
   Sqlite(std::string filename);
   Sqlite(Sqlite &obj);
+  Sqlite();
   ~Sqlite();
 
   // General Functions:
